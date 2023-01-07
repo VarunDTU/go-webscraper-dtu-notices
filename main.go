@@ -72,6 +72,8 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "localhost:8080"
+	} else {
+		port = ":" + port
 	}
 	router.Run(port)
 
