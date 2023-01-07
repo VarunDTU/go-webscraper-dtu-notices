@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	//"fmt"
-	//"os"
+	"os"
 	//"unsafe"
 
 	"github.com/gin-gonic/gin"
@@ -69,6 +69,10 @@ func getNotice(c *gin.Context) {
 func main() {
 	router := gin.Default()
 	router.GET("/notices", getNotice)
-	router.Run("localhost:8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "localhost:8080"
+	}
+	router.Run(port)
 
 }
