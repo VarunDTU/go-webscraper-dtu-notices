@@ -6,6 +6,7 @@ import (
 	"context"
 	"crypto/sha1"
 	"crypto/sha256"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -113,12 +114,13 @@ func getuserinfo(c *gin.Context) {
 }
 
 func erp_login_page(s1, s2 string) {
-
+	temp_h := ""
 	current_profile.ROLLNUMBER = s1
 	ctx, cancel := chromedp.NewContext(context.Background(), chromedp.WithLogf(log.Printf))
 	defer cancel()
-	chromedp.Run(ctx, chromedp.Navigate("https://cumsdtu.in/student_dtu/login/login.jsp"),
+	err := chromedp.Run(ctx, chromedp.Navigate("https://cumsdtu.in/student_dtu/login/login.jsp"),
 
+		chromedp.Text(`body`, &temp_h),
 		chromedp.SetValue("usernameId", s1),
 		chromedp.SetValue("passwordId", s2),
 		chromedp.Click("submitButton"),
@@ -132,6 +134,10 @@ func erp_login_page(s1, s2 string) {
 		chromedp.Text(`ListItem193`, &current_profile.EMAIL),
 		chromedp.Click("Layer_1-2"),
 	)
+	if err != nil {
+		fmt.Print(err)
+	}
+	fmt.Print(temp_h)
 
 }
 
