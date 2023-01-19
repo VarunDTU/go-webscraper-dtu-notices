@@ -135,9 +135,8 @@ func erp_login_page(s1, s2 string) {
 	)
 	if err != nil {
 
-		log.Fatal(err)
+		log.Print(err)
 	}
-	log.Fatal(temp_h)
 
 }
 
