@@ -6,7 +6,6 @@ import (
 	"context"
 	"crypto/sha1"
 	"crypto/sha256"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -135,9 +134,10 @@ func erp_login_page(s1, s2 string) {
 		chromedp.Click("Layer_1-2"),
 	)
 	if err != nil {
-		fmt.Print(err)
+
+		log.Fatal(err)
 	}
-	fmt.Print(temp_h)
+	log.Fatal(temp_h)
 
 }
 
